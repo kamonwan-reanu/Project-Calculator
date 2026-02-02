@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.InputMismatchException; // นำเข้าสำหรับดักจับการพิมพ์ผิด
+import java.util.InputMismatchException;
 
 class Calculator {
     private final double currentResult;
@@ -8,7 +8,6 @@ class Calculator {
         this.currentResult = value;
     }
 
-    // เพิ่ม throws เพื่อระบุว่าเมธอดนี้อาจส่ง Error ออกมา
     public Calculator execute(String op, double nextNum) throws ArithmeticException, IllegalArgumentException {
         double newResult = currentResult;
         switch (op) {
@@ -17,7 +16,6 @@ class Calculator {
             case "*": newResult *= nextNum; break;
             case "/": 
                 if (nextNum == 0) {
-                    // ใช้ throw แทนการสั่ง print เฉยๆ เพื่อส่ง Error ไปให้ main จัดการ
                     throw new ArithmeticException("Division by zero!");
                 }
                 newResult /= nextNum;
@@ -29,7 +27,6 @@ class Calculator {
                 newResult %= nextNum;
                 break;
             default:
-                // ใช้ throw สำหรับกรณี Operator ไม่ถูกต้อง
                 throw new IllegalArgumentException("Invalid Operator: " + op);
         }
         return new Calculator(newResult);
@@ -63,7 +60,6 @@ public class Main {
         Calculator calc = new Calculator(start);
 
         while (true) {
-            // ใช้ try ครอบการทำงานใน Loop ทั้งหมดเพื่อดักจับ Error ระหว่างรัน
             try {
                 System.out.print("\n(+, -, *, /, %) | 'c' Clear | 'q' Quit: ");
                 String op = kb.next();
@@ -80,16 +76,15 @@ public class Main {
                 System.out.print("Next number: ");
                 double nextNum = kb.nextDouble();
 
-                // เรียกใช้งาน execute ซึ่งตอนนี้มีโอกาสโยน Exception แล้ว
                 calc = calc.execute(op, nextNum);
                 calc.display();
 
             } catch (InputMismatchException e) {
-                // ดักจับกรณีพิมพ์ตัวเลขผิด (เช่น พิมพ์ตัวอักษร)
+                // ดักจับกรณีพิมพ์ตัวเลขผิด
                 System.out.println(">>> Error: Please enter a valid number!");
-                kb.nextLine(); // ล้าง Buffer ของ Scanner ไม่ให้เกิด Loop ค้าง
+                kb.nextLine();
             } catch (ArithmeticException | IllegalArgumentException e) {
-                // ดักจับ Error ที่เรา throw มาจากคลาส Calculator (หารศูนย์ หรือ Operator ผิด)
+                // ดักจับ Error ที่เรา throw มาจากคลาส Calculator
                 System.out.println(">>> Error: " + e.getMessage());
             }
         }
