@@ -31,6 +31,9 @@ class Calculator {
                 }
                 newResult %= nextNum;
                 break;
+            case "^": 
+                newResult = Math.pow(currentResult, nextNum); 
+                break;
             default:
                 throw new IllegalArgumentException("Invalid Operator: " + op);
         }
