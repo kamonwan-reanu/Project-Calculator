@@ -97,6 +97,7 @@ public class Main {
         }
 
         System.out.println("\nFinal result: " + calc.getResult() +"\n");
+        System.out.println(x:"--- Project Calculator ---");
         kb.close();
     }
 }
