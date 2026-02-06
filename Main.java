@@ -58,7 +58,7 @@ public class Main {
         double start = 0;
         try {
             System.out.print("\nEnter number: ");
-            start = kb.next();
+            start = kb.nextDouble();
         } catch (InputMismatchException e) {
             System.out.println(">>> Critical Error: Invalid input type.");
             return;
@@ -97,6 +97,7 @@ public class Main {
         }
 
         System.out.println("\nFinal result: " + calc.getResult() +"\n");
+        System.out.println(x:"--- Project Calculator ---");
         kb.close();
     }
 }
