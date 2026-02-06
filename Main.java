@@ -58,7 +58,7 @@ public class Main {
         double start = 0;
         try {
             System.out.print("\nEnter number: ");
-            start = kb.nextDouble();
+            start = kb.next();
         } catch (InputMismatchException e) {
             System.out.println(">>> Critical Error: Invalid input type.");
             return;
